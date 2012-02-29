@@ -15,8 +15,8 @@ public class Main {
 		
 		Fun fun = new Fun(s, funName, x);
 		funName.bind(fun);
-		//Apply prog = new Apply(one, ten);
-		Apply prog = new Apply(fun, ten);
+		Apply prog = new Apply(one, ten);
+		//Apply prog = new Apply(fun, ten);
 		
 		System.out.println(prog.getString());
 		System.out.println(prog.evaluate().getString());
