@@ -82,30 +82,41 @@ public class Parser {
     }
 
 
-    private Statement parseBinaryOperation() {
+    private BinaryOperation parseBinaryOperation() {
         String sign = tokenIterator.next();
 
         if (sign.equals("+")) {
+            return new Plus(parseNext(), parseNext());
 
         } else if (sign.equals("-")) {
+            return new Minus(parseNext(), parseNext());
 
         } else if (sign.equals("*")) {
+            return new Mul(parseNext(), parseNext());
 
         } else if (sign.equals("/")) {
+            return new Div(parseNext(), parseNext());
 
         } else if (sign.equals("%")) {
+            return new Mod(parseNext(), parseNext());
 
         } else if (sign.equals("<")) {
+            return new Less(parseNext(), parseNext());
 
         } else if (sign.equals("<=")) {
+            return new LessEq(parseNext(), parseNext());
 
         } else if (sign.equals(">")) {
+            return new Greater(parseNext(), parseNext());
 
         } else if (sign.equals(">=")) {
+            return new GreaterEq(parseNext(), parseNext());
 
         } else if (sign.equals("==")) {
+            return new Eq(parseNext(), parseNext());
 
         } else if (sign.equals("!=")) {
+            return new NotEq(parseNext(), parseNext());
 
         }
 
