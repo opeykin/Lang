@@ -25,7 +25,7 @@ public class Main {
 		
 		Statement s = new IF(x, new Mul(x, new Apply(funName, new Minus(x, one))), one);
 		
-		Fun fun = new Fun(s, funName, x);
+		Fun fun = new Fun(s, x);
 		funName.bind(fun);
 		//Apply prog = new Apply(one, ten);
 		Apply prog = new Apply(fun, new IntegerConstant(3));

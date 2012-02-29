@@ -3,15 +3,15 @@ package ru.spbau.opeykin.lang;
 public class Fun implements Statement {
 	
 	Statement nextStatement;
-	NameHolder name;
 	NameHolder argumentName;
 
-	public Fun(Statement nextStatement, NameHolder name, NameHolder argumentName) {
-		super();
-		this.nextStatement = nextStatement;
-		this.name = name;
-		this.argumentName = argumentName;
-	}
+
+    public Fun(Statement nextStatement, NameHolder argumentName) {
+        super();
+        this.nextStatement = nextStatement;
+        this.argumentName = argumentName;
+    }
+
 
 	@Override
 	public Statement evaluate() {
@@ -25,7 +25,8 @@ public class Fun implements Statement {
 
 	@Override
 	public Statement substitue(NameHolder nameToReplace, Statement statement) {
-		return new Fun(nextStatement.substitue(nameToReplace, statement), name, argumentName);
+	//	return new Fun(nextStatement.substitue(nameToReplace, statement), name, argumentName);
+		return new Fun(nextStatement.substitue(nameToReplace, statement), argumentName);
 	}
 	
 	@Override
@@ -40,9 +41,5 @@ public class Fun implements Statement {
 
 	public NameHolder getArgumentName() {
 		return argumentName;
-	}
-
-	public NameHolder getName() {
-		return name;
 	}
 }

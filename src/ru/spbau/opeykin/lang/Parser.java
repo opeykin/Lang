@@ -46,13 +46,13 @@ public class Parser {
             if (token.equals("a")) {
 
             } else if (token.equals("f")) {
-
+                return parseFunction();
             } else if (token.equals("!")) {
                 return parseIntegerConstant();
             } else if (token.equals("@")) {
-
+                return parseBinaryOperation();
             } else if (token.equals("?")) {
-
+                return parseIF();
             } else if (token.equals("x")) {
                 return parseNameHolder();
             } else if (token.equals(";")) {
@@ -72,14 +72,30 @@ public class Parser {
     }
 
 
-    private Statement parseNameHolder() {
+    private NameHolder parseNameHolder() {
         return new NameHolder(tokenIterator.next(), bindings);
     }
 
 
-    private Statement parseIntegerConstant() {
+    private IntegerConstant parseIntegerConstant() {
         return new IntegerConstant(Integer.parseInt(tokenIterator.next()));
     }
+
+
+    private Fun parseFunction() {
+        NameHolder argument = parseNameHolder();
+        Statement nextStatement = parseNext();
+        return new Fun(nextStatement, argument);
+    }
+    
+    
+    private IF parseIF() {
+        Statement condition = parseNext();
+        Statement trueStatement = parseNext();
+        Statement falseStatement = parseNext();
+        return new IF(condition, trueStatement, falseStatement);
+    }
+
 
 
     private Statement parseBinaryOperation() {
