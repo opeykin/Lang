@@ -44,15 +44,15 @@ public class Parser {
         while (tokenIterator.hasNext()) {
             String token = tokenIterator.next();
             if (token.equals("a")) {
-
+                return parseApply();
             } else if (token.equals("f")) {
-
+                return parseFunction();
             } else if (token.equals("!")) {
                 return parseIntegerConstant();
             } else if (token.equals("@")) {
-
+                return parseBinaryOperation();
             } else if (token.equals("?")) {
-
+                return parseIF();
             } else if (token.equals("x")) {
                 return parseNameHolder();
             } else if (token.equals(";")) {
@@ -72,40 +72,71 @@ public class Parser {
     }
 
 
-    private Statement parseNameHolder() {
+    private NameHolder parseNameHolder() {
         return new NameHolder(tokenIterator.next(), bindings);
     }
 
 
-    private Statement parseIntegerConstant() {
+    private IntegerConstant parseIntegerConstant() {
         return new IntegerConstant(Integer.parseInt(tokenIterator.next()));
     }
 
 
-    private Statement parseBinaryOperation() {
+    private Fun parseFunction() {
+        NameHolder argument = parseNameHolder();
+        Statement nextStatement = parseNext();
+        return new Fun(nextStatement, argument);
+    }
+
+
+    private IF parseIF() {
+        Statement condition = parseNext();
+        Statement trueStatement = parseNext();
+        Statement falseStatement = parseNext();
+        return new IF(condition, trueStatement, falseStatement);
+    }
+
+
+    private Apply parseApply() {
+        return new Apply(parseNext(), parseNext());
+    }
+
+
+    private BinaryOperation parseBinaryOperation() {
         String sign = tokenIterator.next();
 
         if (sign.equals("+")) {
+            return new Plus(parseNext(), parseNext());
 
         } else if (sign.equals("-")) {
+            return new Minus(parseNext(), parseNext());
 
         } else if (sign.equals("*")) {
+            return new Mul(parseNext(), parseNext());
 
         } else if (sign.equals("/")) {
+            return new Div(parseNext(), parseNext());
 
         } else if (sign.equals("%")) {
+            return new Mod(parseNext(), parseNext());
 
         } else if (sign.equals("<")) {
+            return new Less(parseNext(), parseNext());
 
         } else if (sign.equals("<=")) {
+            return new LessEq(parseNext(), parseNext());
 
         } else if (sign.equals(">")) {
+            return new Greater(parseNext(), parseNext());
 
         } else if (sign.equals(">=")) {
+            return new GreaterEq(parseNext(), parseNext());
 
         } else if (sign.equals("==")) {
+            return new Eq(parseNext(), parseNext());
 
         } else if (sign.equals("!=")) {
+            return new NotEq(parseNext(), parseNext());
 
         }
 
