@@ -1,19 +1,24 @@
 package ru.spbau.opeykin.lang;
 
+import java.util.Map;
+
 public class NameHolder implements Statement {
 	
 	private String name;
-	private Statement bindedStatement;
+    private Map<String, Statement> bindings;
+	//private Statement bindedStatement;
 	
 	
-	public NameHolder(String name) {
+	public NameHolder(String name, Map<String, Statement> bindings) {
 		super();
 		this.name = name;
+        this.bindings = bindings;
 	}
 	
 
 	@Override
 	public Statement evaluate() {
+        Statement bindedStatement = bindings.get(name);
 		if (bindedStatement == null) {
 			return this;
 		} else {
@@ -23,7 +28,7 @@ public class NameHolder implements Statement {
 	
 
 	public void bind(Statement statement) {
-		bindedStatement = statement;
+		bindings.put(name, statement);
 	}
 
 
@@ -33,11 +38,7 @@ public class NameHolder implements Statement {
 	}
 	
 	public boolean isSame(NameHolder holder) {
-		if (name.compareTo(holder.name) == 0) {
-			return true;
-		} else {
-			return false;
-		}
+        return name.compareTo(holder.name) == 0;
 	}
 
 
@@ -53,6 +54,7 @@ public class NameHolder implements Statement {
 
 	@Override
 	public IntegerConstant deInt() {
+        Statement bindedStatement = bindings.get(name);
 		if (bindedStatement == null) {
 			return null;
 		} else {
@@ -63,6 +65,7 @@ public class NameHolder implements Statement {
 
 	@Override
 	public Fun deFun() {
+        Statement bindedStatement = bindings.get(name);
 		if (bindedStatement == null) {
 			return null;
 		} else {
