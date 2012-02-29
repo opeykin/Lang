@@ -20,7 +20,7 @@ public class Fun implements Statement {
 
 	@Override
 	public String getString() {
-		return nextStatement.getString();
+		return "{" + argumentName.getString() + " -> " + nextStatement.getString() + "}";
 	}
 
 	@Override

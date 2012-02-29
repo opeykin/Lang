@@ -47,10 +47,7 @@ public class Apply implements Statement {
 		Fun fun = function.deFun();
 		
 		if (fun != null) {
-			//return fun.substitue(fun.getArgumentName(), argument).getString();
-			return "{" + fun.getArgumentName().getString() + " = " + 
-					argument.getString() +  " -> " + 
-					function.getString() + "}";
+            return "(" + function.getString() + " " + argument.getString() + ")";
 		} else {
 			return "APPLY(" + function.getString() + ", " + argument.getString() + ')';
 		}

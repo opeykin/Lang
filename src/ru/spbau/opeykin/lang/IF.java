@@ -32,8 +32,9 @@ public class IF implements Statement {
 
 	@Override
 	public String getString() {
-		return "IF (" + condition.getString() + ") ? " + 
-				trueStatement.getString() + " : " + falseStatement.getString(); 
+        return
+                condition.getString() + " ? " + trueStatement.getString() +
+                " : " + falseStatement.getString();
 	}
 
 	@Override
