@@ -44,7 +44,7 @@ public class Parser {
         while (tokenIterator.hasNext()) {
             String token = tokenIterator.next();
             if (token.equals("a")) {
-
+                return parseApply();
             } else if (token.equals("f")) {
                 return parseFunction();
             } else if (token.equals("!")) {
@@ -96,6 +96,10 @@ public class Parser {
         return new IF(condition, trueStatement, falseStatement);
     }
 
+
+    private Apply parseApply() {
+        return new Apply(parseNext(), parseNext());
+    }
 
 
     private Statement parseBinaryOperation() {
