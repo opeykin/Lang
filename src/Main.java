@@ -1,4 +1,5 @@
 import ru.spbau.opeykin.lang.Parser;
+import ru.spbau.opeykin.lang.ParsingException;
 import ru.spbau.opeykin.lang.SourceReader;
 import ru.spbau.opeykin.lang.Statement;
 
@@ -21,27 +22,15 @@ public class Main {
         }
 
         Parser p = new Parser(tokens, bindings);
-        Statement s = p.parse();
+        Statement s = null;
+        try {
+            s = p.parse();
+        } catch (ParsingException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
 
         System.out.println(s.getString());
         System.out.println(s.evaluate().getString());
-
-
-        /*
-		IntegerConstant one = new IntegerConstant(1);
-
-		NameHolder funName = new NameHolder("fact", bindings);
-		NameHolder x = new NameHolder("x", bindings);
-		
-		Statement s = new IF(x, new Mul(x, new Apply(funName, new Minus(x, one))), one);
-		
-		Fun fun = new Fun(s, x);
-		funName.bind(fun);
-		//Apply prog = new Apply(one, ten);
-		Apply prog = new Apply(fun, new IntegerConstant(3));
-
-		System.out.println(prog.getString());
-		System.out.println(prog.evaluate().getString());
-		*/
 	}
 }

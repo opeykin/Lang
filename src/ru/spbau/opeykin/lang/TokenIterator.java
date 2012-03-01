@@ -25,6 +25,11 @@ public class TokenIterator {
     }
 
 
+    String current() {
+        return tokens.get(position);
+    }
+
+
     boolean isEmpty() {
         return tokens.isEmpty();
     }
