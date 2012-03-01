@@ -15,8 +15,9 @@ public class Fun implements Statement {
 
 	@Override
 	public Statement evaluate() {
-		return nextStatement.evaluate();
-	}
+//		return nextStatement.evaluate();
+	        return this;
+        }
 
 	@Override
 	public String getString() {
@@ -26,7 +27,11 @@ public class Fun implements Statement {
 	@Override
 	public Statement substitue(NameHolder nameToReplace, Statement statement) {
 	//	return new Fun(nextStatement.substitue(nameToReplace, statement), name, argumentName);
+            if(argumentName.isSame(nameToReplace)) {
+                return new Fun(nextStatement, argumentName);
+            } else {
 		return new Fun(nextStatement.substitue(nameToReplace, statement), argumentName);
+            }
 	}
 	
 	@Override

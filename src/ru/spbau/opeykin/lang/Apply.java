@@ -1,5 +1,6 @@
 package ru.spbau.opeykin.lang;
 
+
 public class Apply implements Statement {
 	
 	Statement function;
@@ -27,12 +28,16 @@ public class Apply implements Statement {
 
 	@Override
 	public Statement evaluate() {
-		Fun fun = function.deFun();
-		if (fun != null) {
-			return fun.substitue(fun.getArgumentName(), argument.evaluate()).evaluate();
-		} else {
-			return this;
-		}
+            Statement x_ = function.evaluate();
+            Statement y_ = argument.evaluate();
+
+            Fun fun = x_.deFun();
+
+            if (fun != null) {
+                    return fun.nextStatement.substitue(fun.getArgumentName(), y_).evaluate();
+            } else {
+                    return this;
+            }
 	}
 
 	@Override
@@ -46,11 +51,11 @@ public class Apply implements Statement {
 	
 		Fun fun = function.deFun();
 		
-		if (fun != null) {
-            return "(" + function.getString() + " " + argument.getString() + ")";
-		} else {
-			return "APPLY(" + function.getString() + ", " + argument.getString() + ')';
-		}
+//		if (fun != null) {
+                    return "(" + function.getString() + " " + argument.getString() + ")";
+//		} else {
+//		    return "APPLY(" + function.getString() + ", " + argument.getString() + ')';
+//		}
 	
 	}
 

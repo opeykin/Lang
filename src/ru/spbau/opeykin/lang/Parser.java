@@ -15,7 +15,7 @@ public class Parser {
 
     List<String> terms;
 
-    Parser(List<String> tokens, Map<String, Statement> bindings) {
+    public Parser(List<String> tokens, Map<String, Statement> bindings) {
         tokenIterator = new TokenIterator(tokens);
         this.bindings = bindings;
         String [] termsArray = {"a", "f", "!", "@", "?", "x", ";"};
@@ -29,12 +29,12 @@ public class Parser {
     }
 */
 
-    Statement parse() {
+    public Statement parse() {
         if (tokenIterator.isEmpty()) {
             return null;
         }
-        String firstToken = tokenIterator.next();
-        inContext = terms.contains(firstToken);
+        //String firstToken = tokenIterator.next();
+        //inContext = terms.contains(firstToken);
         return parseNext();
     }
 
