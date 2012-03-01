@@ -5,7 +5,7 @@ public class Apply implements Statement {
 	Statement function;
 	
 	Statement argument;
-	
+
 	public Apply(Statement function, Statement argument) {
 		super();
 		this.function = function;
@@ -27,12 +27,23 @@ public class Apply implements Statement {
 
 	@Override
 	public Statement evaluate() {
-		Fun fun = function.deFun();
+		Fun fun = function.evaluate().deFun();
 		if (fun != null) {
 			return fun.substitue(fun.getArgumentName(), argument.evaluate()).evaluate();
 		} else {
-			return this;
+            return this;
+       }
+
+       /*
+			Fun fun1 = function.evaluate().deFun();
+            if (fun1 != null) {
+                return fun1.substitue(fun1.getArgumentName(), argument.evaluate()).evaluate();
+            } else {
+                return this;
+            }
 		}
+		*/
+
 	}
 
 	@Override
@@ -42,16 +53,7 @@ public class Apply implements Statement {
 
 	@Override
 	public String getString() {
-		//return "APPLY(" + function.getString() + ", " + argument.getString() + ')';
-	
-		Fun fun = function.deFun();
-		
-		if (fun != null) {
-            return "(" + function.getString() + " " + argument.getString() + ")";
-		} else {
-			return "APPLY(" + function.getString() + ", " + argument.getString() + ')';
-		}
-	
+        return "(" + function.getString() + " " + argument.getString() + ")";
 	}
 
 	@Override

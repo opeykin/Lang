@@ -4,6 +4,7 @@ public class Fun implements Statement {
 	
 	Statement nextStatement;
 	NameHolder argumentName;
+    boolean argumentSubstituted = false;
 
 
     public Fun(Statement nextStatement, NameHolder argumentName) {
@@ -13,9 +14,21 @@ public class Fun implements Statement {
     }
 
 
+    public Fun(Statement nextStatement, NameHolder argumentName, boolean argumentSubstituted) {
+        super();
+        this.nextStatement = nextStatement;
+        this.argumentName = argumentName;
+        this.argumentSubstituted = argumentSubstituted;
+    }
+
+
 	@Override
 	public Statement evaluate() {
-		return nextStatement.evaluate();
+        if (argumentSubstituted) {
+		    return nextStatement.evaluate();
+        } else {
+            return new Fun(nextStatement.evaluate(), argumentName);
+        }
 	}
 
 	@Override
@@ -25,8 +38,10 @@ public class Fun implements Statement {
 
 	@Override
 	public Statement substitue(NameHolder nameToReplace, Statement statement) {
-	//	return new Fun(nextStatement.substitue(nameToReplace, statement), name, argumentName);
-		return new Fun(nextStatement.substitue(nameToReplace, statement), argumentName);
+        if (nameToReplace.isSame(argumentName) && !argumentSubstituted) {
+            argumentSubstituted = true;
+        }
+		return new Fun(nextStatement.substitue(nameToReplace, statement), argumentName, argumentSubstituted);
 	}
 	
 	@Override

@@ -1,6 +1,9 @@
-import ru.spbau.opeykin.lang.*;
+import ru.spbau.opeykin.lang.Parser;
+import ru.spbau.opeykin.lang.SourceReader;
+import ru.spbau.opeykin.lang.Statement;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -8,8 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 
         Map<String, Statement> bindings = new HashMap<String, Statement>();
-        /*
-        String fileName = "name";
+        String fileName = "test.txt";
         List<String> tokens = null;
         try {
              tokens = SourceReader.read(fileName);
@@ -17,7 +19,15 @@ public class Main {
             System.err.println(e.getMessage());
             System.exit(1);
         }
-		*/
+
+        Parser p = new Parser(tokens, bindings);
+        Statement s = p.parse();
+
+        System.out.println(s.getString());
+        System.out.println(s.evaluate().getString());
+
+
+        /*
 		IntegerConstant one = new IntegerConstant(1);
 
 		NameHolder funName = new NameHolder("fact", bindings);
@@ -32,5 +42,6 @@ public class Main {
 
 		System.out.println(prog.getString());
 		System.out.println(prog.evaluate().getString());
+		*/
 	}
 }
