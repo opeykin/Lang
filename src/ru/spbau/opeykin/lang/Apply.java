@@ -3,9 +3,8 @@ package ru.spbau.opeykin.lang;
 
 public class Apply implements Statement {
 	
-	Statement function;
-	
-	Statement argument;
+	private Statement function;
+	private Statement argument;
 	
 	public Apply(Statement function, Statement argument) {
 		super();
@@ -34,7 +33,7 @@ public class Apply implements Statement {
             Fun fun = x_.deFun();
 
             if (fun != null) {
-                    return fun.nextStatement.substitue(fun.getArgumentName(), y_).evaluate();
+                    return fun.getNextStatement().substitute(fun.getArgumentName(), y_).evaluate();
             } else {
                     return this;
             }
@@ -47,15 +46,14 @@ public class Apply implements Statement {
 
 	@Override
 	public String getString() {
-		Fun fun = function.deFun();
                 return "(" + function.getString() + " " + argument.getString() + ")";
 	}
 
 	@Override
-	public Statement substitue(NameHolder name, Statement statement) {
+	public Statement substitute(NameHolder name, Statement statement) {
 		return new Apply(
-				function.substitue(name, statement),
-				argument.substitue(name, statement));
+				function.substitute(name, statement),
+				argument.substitute(name, statement));
 	}
 
 	@Override

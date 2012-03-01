@@ -1,9 +1,9 @@
 package ru.spbau.opeykin.lang;
 
 public class Fun implements Statement {
-	
-	Statement nextStatement;
-	NameHolder argumentName;
+
+    private final Statement nextStatement;
+    private final NameHolder argumentName;
 
 
     public Fun(Statement nextStatement, NameHolder argumentName) {
@@ -13,38 +13,42 @@ public class Fun implements Statement {
     }
 
 
-	@Override
-	public Statement evaluate() {
+    @Override
+    public Statement evaluate() {
 //		return nextStatement.evaluate();
-	        return this;
+        return this;
+    }
+
+    @Override
+    public String getString() {
+        return "{" + argumentName.getString() + " -> " + nextStatement.getString() + "}";
+    }
+
+    @Override
+    public Statement substitute(NameHolder nameToReplace, Statement statement) {
+        //	return new Fun(nextStatement.substitute(nameToReplace, statement), name, argumentName);
+        if (argumentName.isSame(nameToReplace)) {
+            return new Fun(nextStatement, argumentName);
+        } else {
+            return new Fun(nextStatement.substitute(nameToReplace, statement), argumentName);
         }
+    }
 
-	@Override
-	public String getString() {
-		return "{" + argumentName.getString() + " -> " + nextStatement.getString() + "}";
-	}
+    @Override
+    public IntegerConstant deInt() {
+        return null;
+    }
 
-	@Override
-	public Statement substitue(NameHolder nameToReplace, Statement statement) {
-	//	return new Fun(nextStatement.substitue(nameToReplace, statement), name, argumentName);
-            if(argumentName.isSame(nameToReplace)) {
-                return new Fun(nextStatement, argumentName);
-            } else {
-		return new Fun(nextStatement.substitue(nameToReplace, statement), argumentName);
-            }
-	}
-	
-	@Override
-	public IntegerConstant deInt() {
-		return null;
-	}
+    @Override
+    public Fun deFun() {
+        return this;
+    }
 
-	@Override
-	public Fun deFun() {
-		return this;
-	}
+    public NameHolder getArgumentName() {
+        return argumentName;
+    }
 
-	public NameHolder getArgumentName() {
-		return argumentName;
-	}
+    public Statement getNextStatement() {
+        return nextStatement;
+    }
 }

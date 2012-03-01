@@ -1,6 +1,5 @@
 package ru.spbau.opeykin.lang;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -9,19 +8,14 @@ import java.util.Map;
  * Date: 3/1/12
  */
 public class Parser {
-    private TokenIterator tokenIterator;
+    private final TokenIterator tokenIterator;
     private boolean inContext = true;
-    Map<String, Statement> bindings;
-
-    List<String> terms;
+    private final Map<String, Statement> bindings;
 
     public Parser(List<String> tokens, Map<String, Statement> bindings) {
         tokenIterator = new TokenIterator(tokens);
         this.bindings = bindings;
-        String [] termsArray = {"a", "f", "!", "@", "?", "x", ";"};
-        terms = Arrays.asList(termsArray);
     }
-
 
    public Statement parse() {
         if (tokenIterator.isEmpty()) {

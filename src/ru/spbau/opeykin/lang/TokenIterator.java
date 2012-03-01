@@ -6,8 +6,8 @@ import java.util.List;
  * User: Alexander Opeykin
  * Date: 3/1/12
  */
-public class TokenIterator {
-    private List<String> tokens;
+class TokenIterator {
+    private final List<String> tokens;
     private int position = 0;
 
     public TokenIterator(List<String> tokens) {

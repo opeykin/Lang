@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class NameHolder implements Statement {
 	
-	private String name;
-    private Map<String, Statement> bindings;
+	private final String name;
+    private final Map<String, Statement> bindings;
 	//private Statement bindedStatement;
 	
 	
@@ -43,7 +43,7 @@ public class NameHolder implements Statement {
 
 
 	@Override
-	public Statement substitue(NameHolder holder, Statement statement) {
+	public Statement substitute(NameHolder holder, Statement statement) {
 		if (this.isSame(holder)) {
 			return statement;
 		} else {

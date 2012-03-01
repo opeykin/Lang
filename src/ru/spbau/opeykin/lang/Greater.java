@@ -7,10 +7,10 @@ public class Greater extends BinaryOperation {
 	}
 
 	@Override
-	public Statement substitue(NameHolder name, Statement statement) {
+	public Statement substitute(NameHolder name, Statement statement) {
 		return new Greater(
-				firsOperand.substitue(name, statement),
-				secondOperand.substitue(name, statement));
+				firsOperand.substitute(name, statement),
+				secondOperand.substitute(name, statement));
 	}
 
 	@Override

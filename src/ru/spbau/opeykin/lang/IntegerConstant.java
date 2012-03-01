@@ -2,7 +2,7 @@ package ru.spbau.opeykin.lang;
 
 public class IntegerConstant implements Statement {
 	
-	private int value;
+	private final int value;
 	
 
 	public IntegerConstant(int value) {
@@ -21,11 +21,11 @@ public class IntegerConstant implements Statement {
 
 	@Override
 	public String getString() {
-		return new Integer(value).toString();
+		return Integer.toString(value);
 	}
 
 	@Override
-	public Statement substitue(NameHolder name, Statement statement) {
+	public Statement substitute(NameHolder name, Statement statement) {
 		return this;
 	}
 

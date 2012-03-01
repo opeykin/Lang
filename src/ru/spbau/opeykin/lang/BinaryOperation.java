@@ -2,11 +2,11 @@ package ru.spbau.opeykin.lang;
 
 abstract class BinaryOperation implements Statement {
 	
-	protected Statement firsOperand;
-	protected Statement secondOperand;
+	final Statement firsOperand;
+	final Statement secondOperand;
 	
 
-	public BinaryOperation(Statement firsOperand, Statement secondOperand) {
+	BinaryOperation(Statement firsOperand, Statement secondOperand) {
 		super();
 		this.firsOperand = firsOperand;
 		this.secondOperand = secondOperand;
@@ -32,9 +32,9 @@ abstract class BinaryOperation implements Statement {
 	
 /*
 	@Override
-	public Statement substitue(NameHolder holder, Statement statement) {
-		firsOperand = firsOperand.substitue(holder, statement);
-		secondOperand = secondOperand.substitue(holder, statement);
+	public Statement substitute(NameHolder holder, Statement statement) {
+		firsOperand = firsOperand.substitute(holder, statement);
+		secondOperand = secondOperand.substitute(holder, statement);
 		return this;
 	}
 */
