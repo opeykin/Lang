@@ -23,24 +23,15 @@ public class Parser {
     }
 
 
-/*
-    boolean hasNext() {
-        
-    }
-*/
-
-    public Statement parse() {
+   public Statement parse() {
         if (tokenIterator.isEmpty()) {
             return null;
         }
-        //String firstToken = tokenIterator.next();
-        //inContext = terms.contains(firstToken);
         return parseNext();
     }
 
 
     private Statement parseNext() {
-        //String [] termsArray = {"a", "f", "!", "@", "?", "x", ";"};
         while (tokenIterator.hasNext()) {
             String token = tokenIterator.next();
             if (token.equals("a")) {
@@ -56,17 +47,17 @@ public class Parser {
             } else if (token.equals("x")) {
                 return parseNameHolder();
             } else if (token.equals(";")) {
-
+                inContext = false;
+                return parseNext();
             } else {
-                //TODO ????
+                // If we meet identifier like "fact"
+                if (inContext) {
+                    bindings.put(token, parseNext());
+                } else {
+                    return bindings.get(token);
+                }
             }
 
-                /*
-            if (inContext) {
-                
-            }
-            */
-            
         }
         return null;
     }
