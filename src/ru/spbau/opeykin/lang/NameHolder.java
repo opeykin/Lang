@@ -43,7 +43,7 @@ public class NameHolder implements Statement {
 
 
 	@Override
-	public Statement substitue(NameHolder holder, Statement statement) {
+	public Statement substitute(NameHolder holder, Statement statement) {
 		if (this.isSame(holder)) {
 			return statement;
 		} else {

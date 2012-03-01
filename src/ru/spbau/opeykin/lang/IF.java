@@ -38,11 +38,11 @@ public class IF implements Statement {
 	}
 
 	@Override
-	public Statement substitue(NameHolder name, Statement statement) {
+	public Statement substitute(NameHolder name, Statement statement) {
 		return new IF(
-				condition.substitue(name, statement),
-				trueStatement.substitue(name, statement),
-				falseStatement.substitue(name, statement));
+				condition.substitute(name, statement),
+				trueStatement.substitute(name, statement),
+				falseStatement.substitute(name, statement));
 	}
 
 	@Override

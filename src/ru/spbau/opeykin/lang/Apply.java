@@ -29,7 +29,7 @@ public class Apply implements Statement {
 	public Statement evaluate() {
 		Fun fun = function.evaluate().deFun();
 		if (fun != null) {
-			return fun.substitue(fun.getArgumentName(), argument.evaluate()).evaluate();
+			return fun.substitute(fun.getArgumentName(), argument.evaluate()).evaluate();
 		} else {
             return this;
        }
@@ -37,7 +37,7 @@ public class Apply implements Statement {
        /*
 			Fun fun1 = function.evaluate().deFun();
             if (fun1 != null) {
-                return fun1.substitue(fun1.getArgumentName(), argument.evaluate()).evaluate();
+                return fun1.substitute(fun1.getArgumentName(), argument.evaluate()).evaluate();
             } else {
                 return this;
             }
@@ -57,10 +57,10 @@ public class Apply implements Statement {
 	}
 
 	@Override
-	public Statement substitue(NameHolder name, Statement statement) {
+	public Statement substitute(NameHolder name, Statement statement) {
 		return new Apply(
-				function.substitue(name, statement),
-				argument.substitue(name, statement));
+				function.substitute(name, statement),
+				argument.substitute(name, statement));
 	}
 
 	@Override

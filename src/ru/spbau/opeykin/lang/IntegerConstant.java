@@ -25,7 +25,7 @@ public class IntegerConstant implements Statement {
 	}
 
 	@Override
-	public Statement substitue(NameHolder name, Statement statement) {
+	public Statement substitute(NameHolder name, Statement statement) {
 		return this;
 	}
 

@@ -32,9 +32,9 @@ abstract class BinaryOperation implements Statement {
 	
 /*
 	@Override
-	public Statement substitue(NameHolder holder, Statement statement) {
-		firsOperand = firsOperand.substitue(holder, statement);
-		secondOperand = secondOperand.substitue(holder, statement);
+	public Statement substitute(NameHolder holder, Statement statement) {
+		firsOperand = firsOperand.substitute(holder, statement);
+		secondOperand = secondOperand.substitute(holder, statement);
 		return this;
 	}
 */

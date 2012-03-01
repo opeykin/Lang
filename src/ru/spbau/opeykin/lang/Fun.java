@@ -37,11 +37,11 @@ public class Fun implements Statement {
 	}
 
 	@Override
-	public Statement substitue(NameHolder nameToReplace, Statement statement) {
+	public Statement substitute(NameHolder nameToReplace, Statement statement) {
         if (nameToReplace.isSame(argumentName) && !argumentSubstituted) {
             argumentSubstituted = true;
         }
-		return new Fun(nextStatement.substitue(nameToReplace, statement), argumentName, argumentSubstituted);
+		return new Fun(nextStatement.substitute(nameToReplace, statement), argumentName, argumentSubstituted);
 	}
 	
 	@Override

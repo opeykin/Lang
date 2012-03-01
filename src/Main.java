@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 
         Map<String, Statement> bindings = new HashMap<String, Statement>();
-        String fileName = "test.txt";
+        String fileName = "name.txt";
         List<String> tokens = null;
         try {
              tokens = SourceReader.read(fileName);
