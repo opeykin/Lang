@@ -28,11 +28,6 @@ public class Apply implements Statement {
 
 	@Override
 	public Statement evaluate() {
-            // If we applying to nothing
-            if(argument == null) {
-                return function.evaluate();
-            }
-
             Statement x_ = function.evaluate();
             Statement y_ = argument.evaluate();
 
@@ -52,16 +47,8 @@ public class Apply implements Statement {
 
 	@Override
 	public String getString() {
-		//return "APPLY(" + function.getString() + ", " + argument.getString() + ')';
-	
 		Fun fun = function.deFun();
-		
-		if (argument != null) {
-                    return "(" + function.getString() + " " + argument.getString() + ")";
-		} else {
-		    return function.getString();
-		}
-
+                return "(" + function.getString() + " " + argument.getString() + ")";
 	}
 
 	@Override
