@@ -1,9 +1,9 @@
 package ru.spbau.opeykin.lang;
 
-abstract class BinaryOperation implements Statement {
+public abstract class BinaryOperation implements Statement {
 	
-	final Statement firsOperand;
-	final Statement secondOperand;
+	protected Statement firsOperand;
+	protected Statement secondOperand;
 	
 
 	BinaryOperation(Statement firsOperand, Statement secondOperand) {
@@ -14,8 +14,10 @@ abstract class BinaryOperation implements Statement {
 
 	@Override
 	public Statement evaluate() {
-		IntegerConstant first = firsOperand.evaluate().deInt();
-		IntegerConstant second = secondOperand.evaluate().deInt();
+        firsOperand = firsOperand.evaluate();
+        secondOperand = secondOperand.evaluate();
+		IntegerConstant first = firsOperand.deInt();
+		IntegerConstant second = secondOperand.deInt();
 		if (first != null && second != null) {
 			return new IntegerConstant(
 					evaluateOperation(first.getValue(),	second.getValue()));
@@ -30,15 +32,7 @@ abstract class BinaryOperation implements Statement {
 		return null;
 	}
 	
-/*
-	@Override
-	public Statement substitute(NameHolder holder, Statement statement) {
-		firsOperand = firsOperand.substitute(holder, statement);
-		secondOperand = secondOperand.substitute(holder, statement);
-		return this;
-	}
-*/
-	
+
 	public String getString() {
 		return '(' + firsOperand.getString() + ' ' + 
 				getOperationSymbol() + ' ' + secondOperand.getString() + ')';

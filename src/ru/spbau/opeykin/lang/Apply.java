@@ -12,28 +12,17 @@ public class Apply implements Statement {
 		this.argument = argument;
 	}
 
-	public Apply() {
-		super();
-	}
-
-	public Statement getFunction() {
-		return function;
-	}
-
-	public void setArgument(Statement argument) {
-		this.argument = argument;
-	}
-
 
 	@Override
 	public Statement evaluate() {
-            Statement x_ = function.evaluate();
-            Statement y_ = argument.evaluate();
+            function = function.evaluate();
+            argument = argument.evaluate();
 
-            Fun fun = x_.deFun();
+            Fun fun = function.deFun();
 
             if (fun != null) {
-                    return fun.getNextStatement().substitute(fun.getArgumentName(), y_).evaluate();
+                function = fun.getNextStatement().substitute(fun.getArgumentName(), argument).evaluate();
+                return function;
             } else {
                     return this;
             }

@@ -2,7 +2,7 @@ package ru.spbau.opeykin.lang;
 
 public class Fun implements Statement {
 
-    private final Statement nextStatement;
+    private Statement nextStatement;
     private final NameHolder argumentName;
 
 
@@ -15,7 +15,7 @@ public class Fun implements Statement {
 
     @Override
     public Statement evaluate() {
-//		return nextStatement.evaluate();
+        nextStatement = nextStatement.evaluate();
         return this;
     }
 
@@ -26,7 +26,6 @@ public class Fun implements Statement {
 
     @Override
     public Statement substitute(NameHolder nameToReplace, Statement statement) {
-        //	return new Fun(nextStatement.substitute(nameToReplace, statement), name, argumentName);
         if (argumentName.isSame(nameToReplace)) {
             return new Fun(nextStatement, argumentName);
         } else {

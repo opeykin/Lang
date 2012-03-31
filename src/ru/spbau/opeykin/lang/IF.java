@@ -2,7 +2,7 @@ package ru.spbau.opeykin.lang;
 
 public class IF implements Statement {
 	
-	private final Statement condition;
+	private Statement condition;
 	private final Statement trueStatement;
 	private final Statement falseStatement;
 	
@@ -16,7 +16,8 @@ public class IF implements Statement {
 
 	@Override
 	public Statement evaluate() {
-		IntegerConstant result = condition.evaluate().deInt();
+        condition = condition.evaluate();
+		IntegerConstant result = condition.deInt();
 		if (result != null) {
 			if (result.getValue() != 0) {
 				return trueStatement.evaluate();
